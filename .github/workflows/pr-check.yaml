@@ -1,0 +1,29 @@
+#
+# Copyright (c) 2025 Red Hat, Inc.
+# This program and the accompanying materials are made
+# available under the terms of the Eclipse Public License 2.0
+# which is available at https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+
+name: Pull Request Check
+
+# Trigger the workflow on pull request
+on: [pull_request]
+
+jobs:
+  
+  build:
+    name: build
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test secrets
+        run: |
+          MY_VAL="-${{ secrets.TEST_SECRET }}-"
+          echo "Test secret: ${MY_VAL}"
+
